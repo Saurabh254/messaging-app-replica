@@ -94,6 +94,7 @@ body {
     padding: 1em 2em;
     flex-grow: 1;
     max-width: 500px;
+    min-width: 400px
 }
 
 .sidebar .menu {
@@ -193,6 +194,7 @@ body {
     /* width: 100%; */
     flex-grow: 15;
     margin: 1em;
+    max-height: calc(100% -1rem);
     border-radius: 12px;
     position: relative;
 }
@@ -352,10 +354,16 @@ body {
     height: calc(100% - 2 * 3rem - 56px);
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;
     gap: 1em;
     position: relative;
-    justify-content: flex-end;
+    overflow-y: scroll;
+    bottom: 0%;
 }
+
+/* .chat-body::-webkit-scrollbar {
+    display: none;
+} */
 
 .chat-body .message-div {
     /* border: 2px solid black; */

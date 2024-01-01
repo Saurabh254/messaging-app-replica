@@ -13,10 +13,9 @@ const MessageDiv = ({ props }) => {
 
 const ChatBody = ({ messages }) => {
     const elements = []
-    for (let message of messages) {
+    for (const message of messages) {
         elements.push(<MessageDiv props={message} key={message.id} />)
     }
-    const messagesElement = useState()
     return (
         <div className="chat-body">{elements}</div>
     )
