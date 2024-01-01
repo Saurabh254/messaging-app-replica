@@ -1,4 +1,6 @@
-# Currently in development phase
+# Messaging App Replica
+
+### Currently in development phase
 
 Buildin: React, Python
 Database: Postgres and Redis
@@ -12,7 +14,6 @@ Database: Postgres and Redis
 ### Todo:
 
 
-  - Migrate Style.css to StyleSheets
-  - Added body component
-  - Add workflow with demo api
-  - Make it responsive
+  - Types fix
+  - Data Flow fix Implimentation
+  - demo api setup 
