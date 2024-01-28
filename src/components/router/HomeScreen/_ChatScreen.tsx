@@ -1,5 +1,5 @@
 import { FaArrowLeft } from "react-icons/fa";
-import { colors } from "../../colors";
+import { colors } from "../../../colors";
 import { IoMdMore } from 'react-icons/io';
 import { IoSearch } from "react-icons/io5";
 import { MdAdd } from 'react-icons/md';
