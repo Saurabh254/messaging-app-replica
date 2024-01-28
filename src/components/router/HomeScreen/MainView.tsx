@@ -3,7 +3,7 @@ import Sidebar from "./_Sidebar";
 import { useState } from "react";
 import { createContext } from "react";
 import { useContext } from "react";
-import { colors } from "../../colors";
+import { colors } from "../../../colors";
 
 
 export const UserContext = createContext();
