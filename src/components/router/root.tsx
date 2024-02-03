@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import HomeScreen from "./HomeScreen/base";
-import SettingsPage from "./settings/Settings";
-import {LoggedInUser} from "../../utils/loggedInUser.js";
+import SettingsPage from "./settings/Main.js";
+import { LoggedInUser } from "../../utils/loggedInUser.tsx";
 
 const router = createBrowserRouter([
     {
@@ -10,7 +10,7 @@ const router = createBrowserRouter([
     },
     {
         path: "/settings",
-        element: <SettingsPage loggedInUser={LoggedInUser}/>
+        element: <SettingsPage loggedInUser={LoggedInUser} />
     }
 ])
 

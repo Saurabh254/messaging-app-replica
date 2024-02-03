@@ -106,7 +106,7 @@ const ChatScreenInput = ({ data, setdata }) => {
 const Message = ({ isUser, message, time, isRead }) => {
     return (
         <div className={`w-full p-1`}>
-            <div className={`max-w-[40%] w-fit relative text-wrap break-words p-3 pb-5 mx-2 rounded-xl gap-2 flex showdow-sm ${isUser ? 'ml-auto' : ''}`} style={{ backgroundColor: colors.primary }}>
+            <div className={`max-w-[40%] w-fit relative flex-col text-wrap break-words p-2 pb-5 mx-2 rounded-xl gap-2 flex showdow-sm ${isUser ? 'ml-auto' : ''}`} style={{ backgroundColor: colors.primary }}>
                 <span className="text-wrap w-full">{message}</span>
                 <div className="flex gap-2 mt-auto absolute bottom-1 right-2 text-nowrap items-center text-xs clearfix">3:04 PM {isUser ? <CgChevronDoubleRightO className='font-xl' /> : ''}</div>
                 <div className="h-0 overflow-hidden">3:04PM  &</div>
