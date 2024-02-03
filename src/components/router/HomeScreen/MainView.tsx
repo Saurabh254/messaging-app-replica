@@ -56,7 +56,7 @@ const MainView = () => {
     return (
         <UserContext.Provider value={{ chatPerson: [chatScreenPerson, setChatScreenPerson] }} >
             <div className="h-[calc(100%-60px)] flex">
-                <Sidebar userInfo={userInfo} />
+                <Sidebar userInfo={userInfo} setChatPerson={setChatScreenPerson} />
                 {chatScreenPerson ? <ChatScreen {...userInfo[chatScreenPerson]} /> : <NoChatSelectedScreen />}
             </div>
         </UserContext.Provider>
