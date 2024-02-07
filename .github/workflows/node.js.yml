@@ -19,7 +19,4 @@ jobs:
         git config --local user.name "github-actions[bot]"
         git add prod
         git commit -a -m "Add changes"
-    - name: Push changes
-      uses: ad-m/github-push-action@master
-      with:
-        branch: main
+        git push "https://${{secrets.GITHUB_TOKEN}}@github.com/Saurabh254/messaging-app-replica.git" main
