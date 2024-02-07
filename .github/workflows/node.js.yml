@@ -5,9 +5,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - shell: bash 
-        env:
-          SUPER_SECRET: ${{ secrets.ORIGIN_URL }}
+      - shell: bash
       - uses: actions/checkout@v3
         with:
           ref: ${{ github.head_ref }}
@@ -16,6 +14,9 @@ jobs:
         run: npm install 
       - name: build repo 
         run: npx vite build --outDir=prod
+      - name: gettingtoken
+        env:
+          SUPER_SECRET: ${{ secrets.ORIGIN_URL }}
       - name: Commit files
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
