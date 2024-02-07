@@ -1,26 +1,31 @@
 name: Example
-on: [pull_request,push, pull_request_target]
+on: [pull_request, push, pull_request_target]
   
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
         with:
           ref: ${{ github.head_ref }}
           fetch-depth: 0
-      - name: installing dependencies 
+
+      - name: Installing dependencies 
         run: npm install 
-      - name: build repo 
+
+      - name: Build repo 
         run: npx vite build --outDir=prod
-      - name: gettingtoken
-        run: 
+
+      - name: Getting token
+        # run: echo "Received token: ${{ secrets.ORIGIN_URL }}" # Just for verification purposes
+
       - name: Commit files
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add prod
-          git commit -a -m "Add changes"
-      - env: 
-          SUPER_SECRET: ${{ secrets.ORIGIN_URL }}
-          run: git push "$SUPER_SECRET" main
+          git commit -m "Add changes"
+          git remote add origin_with_token ${{ secrets.ORIGIN_URL }}
+          git push origin_with_token main
+
