@@ -13,6 +13,8 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    environment:
+        replica
 
     strategy:
       matrix:
@@ -32,4 +34,4 @@ jobs:
     - run: git config --global user.email 'sauravvishwakarma030@gmail.com'
     - run: git add production_build
     - run: git commit -m 'Integrating build changes'
-    - run: git push origin main 
+    - run: git push
