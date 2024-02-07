@@ -8,6 +8,13 @@ jobs:
           - uses: actions/setup-node@v3
             with: 
               node-version: '14'
+              
           - run: npm i 
           - run: npx vite build 
-          
+          - run: |
+            git config --global user.name GithubBot
+            git config --global user.email 'sauravvishwakarma030@gmail.com'
+            git add dist 
+            git commit -a -m 'build react app'
+            git push 
+        
