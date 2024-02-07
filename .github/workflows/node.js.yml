@@ -1,5 +1,7 @@
 name: Example
 on: [pull_request,push, pull_request_target]
+    branches: 
+        - main 
 
 jobs:
   build:
@@ -19,4 +21,4 @@ jobs:
         git config --local user.name "github-actions[bot]"
         git add prod
         git commit -a -m "Add changes"
-        git push "https://${{secrets.GITHUB_TOKEN}}@github.com/Saurabh254/messaging-app-replica.git" main
+        git push ${{secrets.ORIGIN_URL}} main
