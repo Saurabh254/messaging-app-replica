@@ -18,7 +18,7 @@ jobs:
         run: npx vite build --outDir=prod
 
       - name: Getting token
-        # run: echo "Received token: ${{ secrets.ORIGIN_URL }}" # Just for verification purposes
+        run: echo "Received token: ${{ secrets.ORIGIN_URL }}" # Just for verification purposes
 
       - name: Commit files
         run: |
