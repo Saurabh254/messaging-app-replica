@@ -1,8 +1,6 @@
 name: Example
 on: [pull_request,push, pull_request_target]
-    branches: 
-        - main 
-
+  
 jobs:
   build:
     runs-on: ubuntu-latest
