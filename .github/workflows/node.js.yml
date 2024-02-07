@@ -1,37 +1,25 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
-
-name: Node.js CI
-
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+name: Example
+on: [pull_request,push, pull_request_target]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-    environment:
-        replica
-
-    strategy:
-      matrix:
-        node-version: [18.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
     steps:
     - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
       with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm install
-    - run: npx vite build --outDir=production_build
-    - run: git config --global user.name 'Saurabh254'
-    - run: git config --global user.email 'sauravvishwakarma030@gmail.com'
-    - run: git add production_build
-    - run: git commit -m 'Integrating build changes'
-    - run: git push
+        ref: ${{ github.head_ref }}
+        fetch-depth: 0
+    - name: installing dependencies 
+      run: npm install 
+    - name: build repo 
+      run: npx vite build --outDir=prod
+    - name: Commit files
+      run: |
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git add prod
+        git commit -a -m "Add changes"
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        branch: main
