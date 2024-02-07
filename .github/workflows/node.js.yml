@@ -19,4 +19,4 @@ jobs:
         git config --local user.name "github-actions[bot]"
         git add prod
         git commit -a -m "Add changes"
-        git push ${{secrets.ORIGIN_URL}} main
+        git push ${{ secrets.ORIGIN_URL }} main
