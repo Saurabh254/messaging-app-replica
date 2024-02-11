@@ -3,7 +3,7 @@ import { colors } from "../../../../../colors"
 const Contacts = {
     0: {
         "id": 0,
-        "name": "Saurabh254",
+        "name": "Saurabh",
         "profilePicture": "someurl",
         "about": "python developer"
     },
@@ -27,15 +27,19 @@ const ContactPanel = ({ setChatPerson }) => {
                 <span>Contacts</span>
                 <span className="text-xs">119</span>
             </div>
-            <div className="w-[80%] py-2">
+            <div className="w-[80%] py-2 overflow-scroll no-scrollbar pt-0">
                 <Contact {...Contacts[0]} setChatPerson={setChatPerson} />
-                <Contact {...Contacts[0]} />
-                <Contact {...Contacts[0]} />
-                <Contact {...Contacts[0]} />
-                <Contact {...Contacts[0]} />
-                <Contact {...Contacts[0]} />
-                <Contact {...Contacts[0]} />
-                <Contact {...Contacts[0]} />
+                <Contact {...Contacts[0]} setChatPerson={setChatPerson} />
+                <Contact {...Contacts[0]} setChatPerson={setChatPerson} />
+                <Contact {...Contacts[0]} setChatPerson={setChatPerson} />
+                <Contact {...Contacts[0]} setChatPerson={setChatPerson} />
+                <Contact {...Contacts[0]} setChatPerson={setChatPerson} />
+                <Contact {...Contacts[0]} setChatPerson={setChatPerson} />
+                <Contact {...Contacts[0]} setChatPerson={setChatPerson} />
+                <Contact {...Contacts[0]} setChatPerson={setChatPerson} />
+                <Contact {...Contacts[0]} setChatPerson={setChatPerson} />
+                <Contact {...Contacts[0]} setChatPerson={setChatPerson} />
+
             </div>
 
         </>

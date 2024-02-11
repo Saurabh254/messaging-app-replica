@@ -135,14 +135,13 @@ function sendMessage(data, setdata, setInputText) {
     }
 }
 
-const ChatScreen = ({ name, lastseen, recentChats, username }) => {
+const ChatScreen = ({ name, lastseen, recentChats, username, setChatScreenPerson }) => {
     const { chatPerson } = useContext(UserContext);
-    const [chatScreenPerson, setChatScreenPerson] = chatPerson;
     const [data, setdata] = useState(__data);
 
     return (
         <div className="w-3/4 relative border-x-4 h-full" style={{ borderColor: colors.secondary }}>
-            <ChatScreenHeader name={name} lastseen={lastseen} setChatScreenPerson={setChatScreenPerson} />
+            <ChatScreenHeader name={name ? name : chatPerson} lastseen={lastseen} setChatScreenPerson={setChatScreenPerson} />
             <Messages data={data} className="overflow-scroll  h-[calc(100%-112px)] w-full flex flex-col-reverse no-scrollbar py-4" />
             <ChatScreenInput data={data} setdata={setdata} />
         </div>
