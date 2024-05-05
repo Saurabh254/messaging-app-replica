@@ -1,31 +1,25 @@
-name: Example
-on: [pull_request, push, pull_request_target]
-  
+name: Node.js CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [10.x, 12.x, 14.x, 21.x]
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v2
+      - name: Use Node.js 21.7.3
+        uses: actions/setup-node@v1
         with:
-          ref: ${{ github.head_ref }}
-          fetch-depth: 0
-
-      - name: Installing dependencies 
-        run: npm install 
-
-      - name: Build repo 
-        run: npx vite build --outDir=prod
-
-      - name: Getting token
-        run: echo "Received token: ${{ secrets.ORIGIN_URL }}"
-
-      - name: Commit files
-        run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git add prod
-          git commit -m "Add changes"
-          git remote add origin_with_token ${{ secrets.ORIGIN_URL }}
-          git push origin_with_token main
-
+          node-version: 21.7.3
+      - run: npm ci
+      - run: npm run build --if-present --outDir=prod
+      - run: npm test
