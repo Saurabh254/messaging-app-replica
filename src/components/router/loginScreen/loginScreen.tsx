@@ -1,47 +1,64 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { colors } from "../../../colors";
 
 const LoginScreen = () => {
-    const [phone, setPhone] = useState('');
-    const [otpButton, setOtpButton] = useState('Get OTP');
-    const [otp, setOtp] = useState('');
     const navigate = useNavigate();
-    return (
-        <div className="flex items-center justify-center flex-col w-full h-full">
-            <div className="flex flex-col bg-red-200 p-6 gap-4 rounded-md shadow-sm">
-                <span className="my-2 mx-1">Enter your phone number</span>
-                <input placeholder="Phone number" className="p-2 rounded-lg  border-2 border-gray-200" value={phone} onChange={e => setPhone(e.target.value)} />
-                <div className="flex  flex-col justify-between mx-4 items-center">
-                    <div className="w-full flex items-center">
-                        <span className="my-4 mx-2">Enter OTP:</span>
-                        <input placeholder="OTP" minLength={4} maxLength={4} value={otp} onChange={(event) => setOtp(event.target.value)} className="w-[6rem] flex items-center justify-center text-center rounded-lg border-2 border-grey-200 py-2 px-4  h-[2em]" />
-                    </div>
-                    <button type="submit" className=" w-full  h-[2em] rounded-lg bg-white cursor-pointer border-2 border-grey-200 hover:bg-gray-400" onClick={
-                        () => {
-                            if (otpButton == 'Get OTP') {
-                                fetch(`http://192.168.28.250:8000/public/sms?phoneNumber=${phone}`,
-                                    { method: "POST" }).then(e => { if (e.status == 200) { return } }); setOtpButton('Verify')
-                            } else if (otpButton == 'Verify') {
-                                let res = fetch(`http://192.168.28.250:8000/public/verify?phoneNumber=${phone}&otp=${otp}`, { method: "POST" });
-                                res.then(data => data.json()).then(val => {
-                                    if (val.status == 'verified') { setOtpButton('Verified') } else if (val.status == 'not verified') {
-                                        console.log('Incorrect OTP'); setOtpButton('Get OTP'); return;
-                                    } console.log(val.status);
-                                    navigate('/', { replace: false });
-                                    setOtpButton('Get OTP')
-                                    setOtp('')
-                                    setPhone('')
-                                })
-                            } else {
-                                console.log("Already verfied");
-                            }
-                        }
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [otp, setOTP] = useState('');
+    const [verificationState, setVerificationState] = useState(0);
+    useEffect(() => {
+        setTimeout(() => {
+            localStorage.removeItem('access_token')
+            const token = localStorage.getItem('access_token')
+            if (token == null) {
+                navigate('/login')
+            }
 
-                    }>{otpButton}</button>
+        }, 100000)
+    })
+    return (
+        <div className="flex flex-col items-center justify-center h-[100svh] w-[100svw]">
+            <div className=" p-24 rounded-xl shadow-xl flex flex-col gap-16" style={{ backgroundColor: colors.secondary }}>
+
+                <div className="flex items-center w-full justify-center">
+
+                    <span className="text-3xl text-white font-bold">Messenger Desktop</span>
+                </div>
+                {verificationState == 0 ?
+                    <div className="flex flex-col gap-4 text-white font-bold">
+                        <span className="text-xl">Phone Number:</span>
+                        <input type="text" name="" id="" value={phoneNumber} onInput={(e) => { setPhoneNumber(e.target.value) }} className="text-2xl text-black py-3 px-4 font-normal rounded-lg shadow-lg" />
+                        <span className="ml-auto cursor-pointer">need help?</span>
+                    </div> : <div className="flex flex-col gap-4 text-white font-bold items-center">
+                        <span className="text-xl">Enter the OTP:</span>
+                        <input type="text" name="" id="" value={otp} onInput={(e) => { setOTP(e.target.value) }} className="text-2xl text-black py-3 px-4 font-normal rounded-lg shadow-lg tracking-wide w-[75%]" maxLength={6} minLength={6} />
+                        <span className="ml-auto cursor-pointer mr-12">need help?</span></div>
+                }
+                <div className="w-full flex">
+                    <input type="button" value={verificationState == 0 ? "Send OTP" : "Verify"} onClick={async function () {
+                        if (verificationState == 0) {
+                            const response = await fetch('http://127.0.0.1:8000/ha', { method: "POST", })
+                            if (response.status != 200) { return }
+                            const response_data = await response.json()
+                            console.log(response_data)
+                            setVerificationState(1)
+                        } else {
+                            const response = await fetch('http://127.0.0.1:8000/ha', { method: "POST", })
+                            if (response.status != 200) { return }
+                            const response_data = await response.json()
+                            console.log(response_data)
+                            localStorage.setItem('access_token', "some_secret_token")
+                            navigate('/')
+
+                        }
+                    }
+                    } className="bg-white p-4 rounded-lg shadow-lg ml-auto mr-4 disabled:bg-slate-400 hover:cursor-pointer disabled:hover:scale-100 disabled:text-slate-600
+                    hover:scale-105" disabled={phoneNumber.length == 10 ? false : true} />
                 </div>
             </div>
-        </div >
+
+        </div>
     )
 }
 
