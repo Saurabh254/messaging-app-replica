@@ -16,4 +16,4 @@ something
 
   - Types fix
   - Data Flow fix Implimentation
-  - ~~demo api setup ~~
+  - ~demo api setup~
