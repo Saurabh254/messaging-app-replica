@@ -10,10 +10,3 @@ Database: Postgres and Redis
 
 ![alt text](./public/prototype.png)
 
-something
-### Todo:
-
-
-  - Types fix
-  - Data Flow fix Implimentation
-  - ~demo api setup~
